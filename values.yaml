@@ -1,0 +1,49 @@
+swagger:
+  replicaCount: 1
+  image:
+    repository: swagger
+    tag: latest
+    pullPolicy: IfNotPresent
+  internalPort: 8000
+  service:
+    type: LoadBalancer 
+    port: 8000
+mean:
+  replicaCount: 1
+  image:
+    repository: mean
+    tag: latest
+    pullPolicy: IfNotPresent
+  internalPort: 3000
+  service:
+    type: LoadBalancer
+    port: 3000
+mongo:
+  replicaCount: 1
+  image:
+    repository: mongo
+    tag: latest
+    pullPolicy: IfNotPresent
+  internalPort: 27017
+  service:
+    type: LoadBalancer
+    port: 27017
+redis:
+  replicaCount: 1
+  image:
+    repository: redis
+    tag: latest
+    pullPolicy: IfNotPresent
+  internalPort: 6379
+  service:
+    type: LoadBalancer
+    port: 6379
+omnicored:
+  image:
+    repository: omnicored
+    tag: latest
+    pullPolicy: IfNotPresent
+  internalPort: 8333 
+  service:
+    type: LoadBalancer
+    port: 8333

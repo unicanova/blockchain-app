@@ -1,0 +1,32 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  generateName: test-test-
+  name: mean 
+  labels:
+    app: mean
+spec:
+  replicas: {{ .Values.mean.replicaCount }}
+  selector:
+    matchLabels:
+      app: mean
+  template:
+    metadata:
+      labels:
+        app: mean
+    spec:
+      containers:
+      - name: mean
+        image: "{{ .Values.mean.image.repository }}:{{ .Values.mean.image.tag }}"
+        ports: 
+        - containerPort: 8005
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:
+        - name: MONGO_URL
+          value: mongo.{{ .Release.Namespace  }}.pod.cluster.local
+        - name: GET_HOSTS_FROM
+          value: dns
+        tier: frontend

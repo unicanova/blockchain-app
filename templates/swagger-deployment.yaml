@@ -1,0 +1,34 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  generateName: test-test-
+  name: swagger
+  labels:
+    app: swagger
+spec:
+  replicas: {{ .Values.swagger.replicaCount }}
+  selector:
+    matchLabels:
+      app: swagger
+  template:
+    metadata:
+      labels:
+        app: swagger
+    spec:
+      containers:
+      - name: swagger
+        image: "{{ .Values.swagger.image.repository }}:{{ .Values.swagger.image.tag }}"
+        ports: 
+        - containerPort: 8004
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:
+        - name: REDIS_URL
+          value: redis.{{ .Release.Namespace  }}.pod.cluster.local
+        - name: MONGO_URL
+          value: mongo.{{ .Release.Namespace  }}.pod.cluster.local
+        - name: GET_HOSTS_FROM
+          value: dns
+        tier: frontend

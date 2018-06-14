@@ -1,0 +1,28 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  generateName: test-test-
+  name: omnicored
+  labels:
+    app: omnicored
+spec:
+  replicas: {{ .Values.omnicored.replicaCount }}
+  selector:
+    matchLabels:
+      app: omnicored
+  template:
+    metadata:
+      labels:
+        app: omnicored
+    spec:
+      containers:
+      - name: omnicored
+        image: "{{ .Values.omnicored.image.repository }}:{{ .Values.omnicored.image.tag }}" 
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - name: omnicored
+          containerPort: {{ .Values.omnicored.service.port }}
+          hostPort: {{ .Values.omnicored.service.port }}

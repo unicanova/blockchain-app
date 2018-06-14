@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  generateName: test-test-
+  name: mean
+  labels:
+    app: mean
+spec:
+  type: {{ .Values.mean.service.type }}
+  ports:
+    - port: {{ .Values.mean.service.port }}
+      targetPort: {{ .Values.mean.service.port }}
+  selector:
+    app: mean
