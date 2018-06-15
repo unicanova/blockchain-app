@@ -1,7 +1,7 @@
 swagger:
   replicaCount: 1
   image:
-    repository: swagger
+    repository: gcr.io/trusty-gradient-182808/swagger
     tag: latest
     pullPolicy: IfNotPresent
   internalPort: 8000
@@ -11,7 +11,7 @@ swagger:
 mean:
   replicaCount: 1
   image:
-    repository: mean
+    repository: gcr.io/trusty-gradient-182808/mean
     tag: latest
     pullPolicy: IfNotPresent
   internalPort: 3000
@@ -40,7 +40,7 @@ redis:
     port: 6379
 omnicored:
   image:
-    repository: omnicored
+    repository: gcr.io/trusty-gradient-182808/omnicored
     tag: latest
     pullPolicy: IfNotPresent
   internalPort: 8333 
