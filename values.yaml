@@ -19,7 +19,7 @@ mean:
     type: LoadBalancer
     port: 3000
 mongo:
-  replicaCount: 3
+  replicaCount: 1 
   image:
     repository: mongo
     tag: latest

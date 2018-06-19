@@ -41,18 +41,16 @@ spec:
             - "27017"
             - "--bind_ip"
             - "0.0.0.0"
-            - "--replSet"
-            - "MainRepSet"
             - "--dbpath"
             - "/mongo-disk"
           ports:
             - containerPort: 27017
           volumeMounts:
-            - name: mongo-persistent-storage 
+            - name: mongodb-persistent-storage 
               mountPath: /mongo-disk
   volumeClaimTemplates:
   - metadata:
-      name: mongodb-persistent-storage-claim
+      name: mongodb-persistent-storage
       annotations:
         volume.beta.kubernetes.io/storage-class: "fast"
     spec:
