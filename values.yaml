@@ -22,7 +22,7 @@ mongo:
   replicaCount: 1 
   image:
     repository: mongo
-    tag: latest
+    tag: 4.0.0-rc5-xenial
     pullPolicy: IfNotPresent
   internalPort: 27017
   service:

@@ -2,20 +2,20 @@ apiVersion: apps/v1beta2
 kind: StatefulSet
 metadata:
   generateName: test-test-
-  name: mongo
+  name: omnicored 
   labels:
-    app: mongo
+    app: omnicored
 spec:
-  replicas: {{ .Values.mongo.replicaCount }}
+  replicas: {{ .Values.omnicored.replicaCount }}
   selector:
     matchLabels:
-      role: mongodb-shard1
-      app: mongo
+      role: omnicored-shard1
+      app: omnicored
   template:
     metadata:
       labels:
-        app: mongo
-        role: mongodb-shard1
+        app: omnicored
+        role: omnicored-shard1
         tier: maindb
         replicaset: MainRepSet
     spec:
@@ -29,28 +29,20 @@ spec:
                 - key: replicaset
                   operator: In
                   values:
-                  - mongo
+                  - omnicored
               topologyKey: kubernetes.io/hostname
       terminationGracePeriodSeconds: 10
       containers:
-        - name: mongo
-          image: "{{ .Values.mongo.image.repository }}:{{ .Values.mongo.image.tag }}"
-          command:
-            - "mongod"
-            - "--port"
-            - "27017"
-            - "--bind_ip"
-            - "0.0.0.0"
-            - "--dbpath"
-            - "/mongo-disk"
+        - name: omnicored
+          image: "{{ .Values.omnicored.image.repository }}:{{ .Values.omnicored.image.tag }}"
           ports:
             - containerPort: 27017
           volumeMounts:
-            - name: mongodb-persistent-storage 
-              mountPath: /mongo-disk
+            - name: bitcoind-data 
+              mountPath: /bitcoind-disk
   volumeClaimTemplates:
   - metadata:
-      name: mongodb-persistent-storage
+      name: bitcoind-data
       annotations:
         volume.beta.kubernetes.io/storage-class: "fast"
     spec:
