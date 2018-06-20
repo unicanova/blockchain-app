@@ -6,7 +6,7 @@ swagger:
     pullPolicy: IfNotPresent
   internalPort: 8000
   service:
-    type: LoadBalancer 
+    type: NodePort 
     port: 8000
 mean:
   replicaCount: 1
