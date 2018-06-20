@@ -11,4 +11,5 @@ spec:
     - port: {{ .Values.mongo.service.port }}
       targetPort: {{ .Values.mongo.service.port }}
   selector:
+    role: mongodb-shard1
     app: mongo 
